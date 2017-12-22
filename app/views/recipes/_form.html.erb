@@ -1,0 +1,134 @@
+<div class="controls">
+  <%= form_with(model: recipe, local: true, role: "form") do |form| %>
+    <% if recipe.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+        <ul>
+        <% recipe.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <%= form.label :name %>
+          <%= form.text_field :name, id: :recipe_name, class: "form-control", placeholder: "Name" %>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="dropdown">
+          <%= form.label :style %>
+          <%= form.select :style_id, options_for_select(Style.all.map {|s| [s.name, s.id]}), {}, {:class => "form-control"} %>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <%= form.label :brew_method %>
+          <%= form.select :brew_method_id, options_for_select(BrewMethod.all.map {|b| [b.name, b.id]}), {}, {:class => "form-control"} %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <%= form.label :batch_size %>
+          <%= form.text_field :batch_size, id: :batch_size, class: "form-control", placeholder: "5 gallons" %>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <%= form.label :original_gravity %>
+          <%= form.text_field :original_gravity, id: :original_gravity, class: "form-control", placeholder: "1.055" %>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <%= form.label :final_gravity %>
+          <%= form.text_field :final_gravity, id: :final_gravity, class: "form-control", placeholder: "1.010" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-header">
+            Wort
+          </div>
+          <div class="card-block" style="padding:1.25em;">
+            <div class="form-group">
+              <div class="entry input-group">
+                <%= form.text_field :malts, id: :malts_2, class: "form-control", placeholder: "Two Row" %>
+                <span class="input-group-btn">
+                  <button class="btn btn-success btn-add" type="button">
+                    <%= icon('plus-circle') %>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-header">
+            Hops
+          </div>
+          <div class="card-block" style="padding:1.25em;">
+            <div class="form-group">
+              <div class="entry input-group">
+                <%= form.text_field :hops, class: "form-control", placeholder: "Citrus" %>
+                <span class="input-group-btn">
+                  <button class="btn btn-success btn-add" type="button">
+                    <%= icon('plus-circle') %>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div id='pay-type-component' class="col-sm-6"></div>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Save", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+<%= javascript_pack_tag("hops") %>
+
+<script>
+  jQuery(function()
+    {
+      jQuery(document).on('click', '.btn-add', function(e)
+      {
+          e.preventDefault();
+
+          var controlForm = jQuery('.controls form:first'),
+              currentEntry = jQuery(this).parents('.entry:first'),
+              formGroup = jQuery(this).parents('.form-group:first'),
+              newEntry = jQuery(currentEntry.clone()).appendTo(formGroup);
+
+          newEntry.find('input').val('');
+
+          jQuery(this).removeClass('btn-add').addClass('btn-remove')
+            .removeClass('btn-success').addClass('btn-danger')
+            .html('<%= icon('minus-circle') %>');
+      }).on('click', '.btn-remove', function(e)
+      {
+      jQuery(this).parents('.entry:first').remove();
+
+      e.preventDefault();
+      return false;
+    });
+  });
+</script>
