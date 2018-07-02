@@ -1,0 +1,30 @@
+<div class="row form-group">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header">
+        Wort
+      </div>
+      <div class="card-block" style="padding:1.25em;">
+        <div class="form-group">
+          <div class="entry input-group">
+            <%= form.text_field :malts, id: :malts_2, class: "form-control", placeholder: "Two Row" %>
+            <%= hidden_field(:recipe, :malt_additions, class: "hidden-field") %>
+            <span class="input-group-btn">
+              <button class="btn btn-success btn-add" type="button">
+                <%= icon('plus-circle') %>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header">
+        Hops
+      </div>
+      <%= render 'hops', form: form, recipe: recipe %>
+    </div>
+  </div>
+</div>

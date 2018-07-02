@@ -1,0 +1,30 @@
+<div class="controls">
+  
+
+  <script>
+    jQuery(function()
+      {
+        jQuery(document).on('click', '.btn-remove', function(e)
+        {
+            e.preventDefault();
+
+            var controlForm = jQuery('.controls form:first'),
+                currentEntry = jQuery(this).parents('.entry:first'),
+                formGroup = jQuery(this).parents('.form-group:first'),
+                newEntry = jQuery(currentEntry.clone()).appendTo(formGroup);
+
+            newEntry.find('input').val('');
+
+            jQuery(this).removeClass('btn-add').addClass('btn-remove')
+              .removeClass('btn-success').addClass('btn-danger')
+              .html('<%= icon('minus-circle') %>');
+        }).on('click', '.btn-remove', function(e)
+        {
+        jQuery(this).parents('.entry:first').remove();
+
+        e.preventDefault();
+        return false;
+      });
+    });
+  </script>
+</div>

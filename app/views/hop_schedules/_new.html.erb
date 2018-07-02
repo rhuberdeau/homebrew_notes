@@ -1,0 +1,47 @@
+<div class="controls">
+  <%= form_with(model: hop_schedule, local: true, role: "form") do |hop_form| %>
+    <% if hop_schedule.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(hop_schedule.errors.count, "error") %> prohibited this hop_schedule from being saved:</h2>
+
+        <ul>
+        <% hop_schedule.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <div class="entry input-group">
+        <%= hop_form.text_field :amount, id: :hop_amount, class: "form-control" %>
+        <%= hop_form.select :hop_id, options_for_select(Hop.all.map {|b| [b.name, b.id]}), {}, {class: "form-control", id: "hop_id"} %>
+        <%= hop_form.text_field :at, id: :hop_at, class: "form-control" %>
+        <span class="input-group-btn">
+          <button class="btn btn-success btn-remove" id="add-hop" type="button">
+            <%= icon('plus-circle') %>
+          </button>
+        </span>
+      </div>
+    </div>
+  <% end %>
+
+  <script type="text/javascript">
+      $('#add-hop').click(function() {
+          var hop_amount = $('#hop_amount').val();
+          var hop_id     = $('#hop_id').val();
+          var hop_at     = $('#hop_at').val();
+
+          $.ajax({
+            type: 'POST',
+            url: "/hop_schedules",
+            dataType: 'json',
+            data: {hop_schedule: { recipe_id: 18, hop_id: hop_id, amount: hop_amount, at: hop_at }},
+            error: function(){ console.log("error!"); },
+            success: function(data){ console.log(data); },
+            complete: function (){   }
+            });
+    return false;
+    });
+  </script>
+</div>
