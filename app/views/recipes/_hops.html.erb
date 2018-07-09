@@ -5,12 +5,7 @@
   </div>
 
   <h3>Hops</h3>
-  <div id="app-7">
-    <schedule
-      v-for="schedule in schedules"
-      v-bind:schedule="schedule"
-      v-bind:key="schedule.id">
-    </schedule>
-  </div>
-
+    <% recipe.hop_schedules.each do |hop_schedule| %>
+      <%= render "hop_schedules/form", hop_schedule: hop_schedule %>
+    <% end %>
 </div>

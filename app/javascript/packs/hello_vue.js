@@ -32,21 +32,6 @@ document.addEventListener('turbolinks:load', () => {
     components: { App }
   })
 
-  const app2 = new Vue({
-    el: '#app-2',
-    data: {
-      message: 'You loaded this page on ' + new Date().toLocaleString()
-    }
-  })
-
-  Vue.component('todo-item', {
-    // The todo-item component now accepts a
-    // "prop", which is like a custom attribute.
-    // This prop is called todo.
-    props: ['todo'],
-    template: '<li>{{ todo.text }}</li>'
-  })
-
   Vue.component('schedule', {
     // The todo-item component now accepts a
     // "prop", which is like a custom attribute.
