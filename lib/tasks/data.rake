@@ -1,0 +1,67 @@
+namespace :data do
+  desc "Create Malts"
+  task create_malts: :environment do
+
+    array = [
+      "Base Malt - 2-Row (American)",
+      "Base Malt - 2-Row (American)",
+      "Base Malt - 6-Row (American)",
+      "Base Malt - Distiller's Malt (Canada)",
+      "Base Malt - Franco Belges Pale Ale (France)",
+      "Base Malt - Golden Promise (UK)",
+      "Base Malt - Lager (UK)",
+      "Base Malt - Maris Otter (UK)",
+      "Base Malt - Maris Otter (UK) ",
+      "Base Malt - Munich (American)",
+      "Base Malt - Northwest Pale Ale (American)",
+      "Base Malt - Northwest Pale Ale (American) ",
+      "Base Malt - Optic (UK)",
+      "Base Malt - Superior Pilsen (American)",
+      "Base Malt - Superior Pilsen (American) ",
+      "Base Malt - Vienna (American)",
+      "Base Malt - White Wheat (American)",
+      "Base Malt - White Wheat (American) ",
+      "SpeciBase Malt - Pale Rice (American)",
+      "Caramel / Crystal Malt - 120 Lovibond (American)",
+      "Caramel / Crystal Malt - 15 Lovibond (American)",
+      "Caramel / Crystal Malt - 150 Lovibond (American)",
+      "Caramel / Crystal Malt - 30 Lovibond (American)",
+      "Caramel / Crystal Malt - 40 Lovibond (American)",
+      "Caramel / Crystal Malt - 60 Lovibond (American)",
+      "Caramel / Crystal Malt - 75 Lovibond (American)",
+      "Caramel / Crystal Malt - Carahell (Germany)",
+      "Caramel / Crystal Malt - Caramunich 40 (France)",
+      "Caramel / Crystal Malt - Caramunich 60 (France) ",
+      "Caramel / Crystal Malt - Carapils Dextrin (American)",
+      "Caramel / Crystal Malt - Carared (Germany)",
+      "Caramel / Crystal Malt - Carastan (UK)",
+      "Caramel / Crystal Malt - Caravienne (Belgium)",
+      "Caramel / Crystal Malt - Crystal Rye (UK)",
+      "Caramel / Crystal Malt - Crystal Wheat (American)",
+      "Specialty Malt / Grain - Crystal Rice (American)",
+      "Flaked Barley (American)",
+      "Flaked Corn / Maize (American)",
+      "Flaked / Rolled Oats (American)",
+      "Flaked Rice (American)",
+      "Flaked Rye (American)",
+      "Amber, Kiln (France)",
+      "Black Patent (UK)",
+      "Carafa I Dehusked (Germany)",
+      "Carafa II Dehusked (Germany)",
+      "Carafa III Dehusked (Germany)",
+      "Chocolate - Crisp (UK)",
+      "Chocolate Rye (Germany)",
+      "Chocolate Wheat (Germany)",
+      "Coffee Special Roast (Belgium)",
+      "Dark Rice (American)",
+      "Gas Hog Roasted Rice (American)",
+      "Kiln Coffee (Belgium)",
+      "Pale Chocolate (UK)",
+      "Roasted Barley (UK)",
+    ]
+    
+    array.each do |a|
+      Malt.find_or_create_by(name: a)
+    end
+  end
+end
