@@ -4,19 +4,14 @@
       <div class="card-header">
         Wort
       </div>
-      <div class="card-block" style="padding:1.25em;">
-        <div class="form-group">
-          <div class="entry input-group">
-            <%= form.text_field :malts, id: :malts_2, class: "form-control", placeholder: "Two Row" %>
-            <%= hidden_field(:recipe, :malt_additions, class: "hidden-field") %>
-            <span class="input-group-btn">
-              <button class="btn btn-success btn-add" type="button">
-                <%= icon('plus-circle') %>
-              </button>
-            </span>
-          </div>
+      <%= form.fields_for :recipe_malts do |malt_form| %>
+      <div class="form-group">
+        <div class="entry input-group">
+          <%= render 'recipe_malt_fields', form: malt_form %>
         </div>
       </div>
+      <% end %>
+      <%= link_to_add_fields "Add Malts", form, :recipe_malts %>
     </div>
   </div>
   <div class="col-sm-6">
@@ -24,7 +19,14 @@
       <div class="card-header">
         Hops
       </div>
-      <%= render 'hops', form: form, recipe: recipe %>
+      <%= form.fields_for :hop_schedules do |hop_form| %>
+        <div class="form-group">
+          <div class="entry input-group">
+            <%= render 'hop_schedule_fields', form: hop_form %>
+          </div>
+        </div>
+      <% end %>
+      <%= link_to_add_fields "Add Hops", form, :hop_schedules %>
     </div>
   </div>
 </div>
