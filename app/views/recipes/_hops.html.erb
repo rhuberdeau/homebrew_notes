@@ -2,10 +2,15 @@
   <h3>Add more hops</h3>
   <div class="form-group">
     <%= render "hop_schedules/new", hop_schedule: recipe.hop_schedules.build %>
+  </div>
 
   <h3>Hops</h3>
-  <% recipe.hop_schedules.each do |hop_schedule| %>
-    <%= render 'hop_schedules/form', hop_schedule: hop_schedule %>
-  <% end %>
+  <div id="app-7">
+    <schedule
+      v-for="schedule in schedules"
+      v-bind:schedule="schedule"
+      v-bind:key="schedule.id">
+    </schedule>
+  </div>
 
 </div>

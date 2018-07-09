@@ -5,12 +5,17 @@ class HopSchedulesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-
+    @recipe = Recipe.includes(:hop_schedules).find(18)
+    @hop_schedules = @recipe.hop_schedules
+    @hop_schedules.each do |schedule|
+      schedule.name = schedule.hop.name
+    end
   end
 
   # GET /recipes/1
   # GET /recipes/1.json
   def show
+
   end
 
   # GET /recipes/new

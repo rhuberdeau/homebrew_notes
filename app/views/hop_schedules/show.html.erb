@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<% @hop_schedules.each do |hop_schedule| %>
+  <p>
+    <strong>Amount:</strong>
+    <%= hop_schedule.amount %>
+  </p>
+<% end %>

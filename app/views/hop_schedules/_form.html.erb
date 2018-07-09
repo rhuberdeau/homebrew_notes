@@ -1,10 +1,35 @@
 <div class="controls">
-  
+  <%= form_with(model: hop_schedule, local: true, role: "form") do |hop_form| %>
+    <% if hop_schedule.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(hop_schedule.errors.count, "error") %> prohibited this hop_schedule from being saved:</h2>
+
+        <ul>
+        <% hop_schedule.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <div class="entry input-group">
+        <%= hop_form.text_field :amount, class: "form-control" %>
+        <%= hop_form.select :hop_id, options_for_select(Hop.all.map {|b| [b.name, b.id]}), {}, {:class => "form-control"} %>
+        <%= hop_form.text_field :at, class: "form-control" %>
+        <span class="input-group-btn">
+          <button class="btn btn-danger btn-remove" type="button">
+            <%= icon('minus-circle') %>
+          </button>
+        </span>
+      </div>
+    </div>
+  <% end %>
 
   <script>
     jQuery(function()
       {
-        jQuery(document).on('click', '.btn-remove', function(e)
+        jQuery(document).on('click', '.btn-', function(e)
         {
             e.preventDefault();
 

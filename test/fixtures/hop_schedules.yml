@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hop_id: 
+  recipe_id: 
+  amount: 
+  at: 1
+
+two:
+  hop_id: 
+  recipe_id: 
+  amount: 
+  at: 1

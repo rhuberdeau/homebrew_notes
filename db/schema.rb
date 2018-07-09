@@ -10,9 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171218042042) do
+ActiveRecord::Schema.define(version: 20180701195321) do
 
   create_table "brew_methods", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hop_schedules", force: :cascade do |t|
+    t.integer "hop_id", null: false
+    t.integer "recipe_id", null: false
+    t.integer "amount", null: false
+    t.string "at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hop_id"], name: "index_hop_schedules_on_hop_id"
+    t.index ["recipe_id"], name: "index_hop_schedules_on_recipe_id"
+  end
+
+  create_table "hops", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "alpha_level", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "malts", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
