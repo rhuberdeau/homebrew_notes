@@ -3,5 +3,4 @@ class Hop < ApplicationRecord
   has_many :recipes, through: :recipe_schedules
 
   validates :name, presence: true
-  validates :alpha_level, presence: true
 end
