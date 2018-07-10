@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  # skip_before_action :verify_authenticity_token, :only => :create
 
   # GET /recipes
   # GET /recipes.json
@@ -71,7 +72,7 @@ class RecipesController < ApplicationController
     def recipe_params
       params.require(:recipe).permit(:name, :brew_method_id, :style_id, :batch_size,
         :original_gravity, :final_gravity, hop_schedules_attributes: [ :id,
-        :hop_id, :recipe_id, :amount, :at ], recipe_malts_attributes: [ :id,
+        :hop_id, :recipe_id, :amount, :at, :alpha_level, :_destroy ], recipe_malts_attributes: [ :id,
         :malt_id, :recipe_id, :amount ]
       )
     end
