@@ -1,17 +1,22 @@
 <%= content_tag :div,
     id: "recipe-form",
+    class: "controls",
     data: {
         id: recipe.id,
         recipe: recipe.to_json(except: [:id, :created_at, :updated_at]),
         hop_schedules_attributes: recipe.hop_schedules.to_json(except: [:recipe_id, :created_at, :updated_at]),
     } do %>
 
-    <label>Recipe Name</label>
-    <input type="text" v-model="recipe.name" />
-    <label>Brew Method</label>
-    <input type="text" v-model="recipe.brew_method_id" />
-    <label>Brew Style</label>
-    <input type="text" v-model="recipe.style_id" />
+    <div class="form-group">
+      <div class="entry input-group">
+        <label>Recipe Name</label>
+        <input type="text" v-model="recipe.name" class="form-control"/>
+        <label>Brew Method</label>
+        <input type="text" v-model="recipe.brew_method_id" />
+        <label>Brew Style</label>
+        <input type="text" v-model="recipe.style_id" />
+      </div>
+    </div>
 
     <h4>Hops</h4>
     <div v-for="(hop, index) in recipe.hop_schedules_attributes">
