@@ -1,2 +1,0 @@
-<%= form.text_field :amount, class: "form-control" %>
-<%= form.select :malt_id, options_for_select(Malt.order(name: :asc).map {|b| [b.name, b.id]}), {}, {:class => "form-control"} %>

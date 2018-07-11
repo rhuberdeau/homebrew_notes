@@ -5,6 +5,11 @@
   <%= @recipe.name %>
 </p>
 
+<h4>Malts</h4>
+<% @recipe.malts.each do |malt| %>
+  <%= malt.name %><br  />
+<% end %>
+
 <h4>Hops</h4>
 <% @recipe.hops.each do |hop| %>
   <%= hop.name %><br  />

@@ -5,8 +5,9 @@
         id: recipe.id,
         recipe: recipe.to_json(except: [:id, :created_at, :updated_at]),
         hop_schedules_attributes: recipe.hop_schedules.to_json(except: [:recipe_id, :created_at, :updated_at]),
+        recipe_malts_attributes: recipe.recipe_malts.to_json(except: [:recipe_id, :created_at, :updated_at]),
     } do %>
-
+<!--
     <div class="form-group">
       <div class="entry input-group">
         <label>Recipe Name</label>
@@ -32,6 +33,70 @@
     <button v-on:click="addHop">Add Hop</button>
     <br  />
 
-    <button v-on:click="saveRecipe">Save Recipe</button>
+    <button v-on:click="saveRecipe">Save Recipe</button> -->
+
+    <%= form_with(model: recipe, local: true, role: "form") do |form| %>
+      <% if recipe.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+          <ul>
+          <% recipe.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= form.label :name %>
+            <%= form.text_field :name, id: :recipe_name, class: "form-control", placeholder: "Name", "v-model": "recipe.name" %>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="dropdown">
+            <%= form.label :style %>
+            <%= form.select :style_id, options_for_select(Style.all.map {|s| [s.name, s.id]}), {}, {:class => "form-control"} %>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= form.label :brew_method %>
+            <%= form.select :brew_method_id, options_for_select(BrewMethod.all.map {|b| [b.name, b.id]}), {}, {:class => "form-control"} %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= form.label :batch_size %>
+            <%= form.text_field :batch_size, id: :batch_size, class: "form-control", placeholder: "5 gallons", "v-model": "recipe.batch_size" %>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= form.label :original_gravity %>
+            <%= form.text_field :original_gravity, id: :original_gravity, class: "form-control", placeholder: "1.055", "v-model": "recipe.original_gravity" %>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= form.label :final_gravity %>
+            <%= form.text_field :final_gravity, id: :final_gravity, class: "form-control", placeholder: "1.010", "v-model": "recipe.final_gravity" %>
+          </div>
+        </div>
+      </div>
+
+      <% if recipe.persisted? %>
+        <%= render 'edit_fields', recipe: recipe, form: form %>
+      <% end %>
+
+      <div class="actions">
+        <input type="submit" v-on:click.prevent="saveRecipe" name="commit" value="Save" class="btn btn-primary" data-disable-with="Save">
+      </div>
+    <% end %>
 
 <% end %>

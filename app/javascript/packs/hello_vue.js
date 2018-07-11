@@ -12,8 +12,11 @@ document.addEventListener('turbolinks:load', () => {
       var id = element.dataset.id
       var recipe = JSON.parse(element.dataset.recipe)
       var hop_schedules_attributes = JSON.parse(element.dataset.hopSchedulesAttributes)
+      var recipe_malts_attributes = JSON.parse(element.dataset.recipeMaltsAttributes)
       hop_schedules_attributes.forEach(function(schedule) { schedule._destroy = null });
+      recipe_malts_attributes.forEach(function(schedule) { schedule._destroy = null });
       recipe.hop_schedules_attributes = hop_schedules_attributes
+      recipe.recipe_malts_attributes = recipe_malts_attributes
 
         const app = new Vue({
             el: element,
@@ -27,6 +30,15 @@ document.addEventListener('turbolinks:load', () => {
                   hop_id: "",
                   amount: "",
                   at: "",
+                  _destroy: null
+                })
+              },
+
+              addMalt: function(){
+                this.recipe.recipe_malts_attributes.push({
+                  id: null,
+                  malt_id: "",
+                  amount: "",
                   _destroy: null
                 })
               },
