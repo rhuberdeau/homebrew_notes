@@ -11,6 +11,7 @@ document.addEventListener('turbolinks:load', () => {
     if (element != null) {
       var id = element.dataset.id
       var recipe = JSON.parse(element.dataset.recipe)
+      var recipe_errors = JSON.parse(element.dataset.recipeErrors)
       var hop_schedules_attributes = JSON.parse(element.dataset.hopSchedulesAttributes)
       var recipe_malts_attributes = JSON.parse(element.dataset.recipeMaltsAttributes)
       hop_schedules_attributes.forEach(function(schedule) { schedule._destroy = null });
@@ -21,9 +22,12 @@ document.addEventListener('turbolinks:load', () => {
         const app = new Vue({
             el: element,
             data: function() {
-              return { id: id, recipe: recipe }
+              return { id: id, recipe: recipe, recipe_errors: recipe_errors }
             },
             methods: {
+              hasError: function() {
+                 'is-invalid' 
+              },
               addHop: function(){
                 this.recipe.hop_schedules_attributes.push({
                   id: null,
@@ -63,8 +67,8 @@ document.addEventListener('turbolinks:load', () => {
                 } else {
                   this.$http.put(`/recipes/${this.id}`, { recipe: this.recipe }).then(response => {
                       Turbolinks.visit(`/recipes/${response.body.id}`)
-                  }, response => {
-                      console.log(response)
+                  }, error => {
+                      this.recipe_errors = JSON.parse(error.bodyText);
                   })
                 }
               }

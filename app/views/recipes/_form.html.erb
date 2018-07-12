@@ -4,6 +4,7 @@
     data: {
         id: recipe.id,
         recipe: recipe.to_json(except: [:id, :created_at, :updated_at]),
+        recipe_errors: {},
         hop_schedules_attributes: recipe.hop_schedules.to_json(except: [:recipe_id, :created_at, :updated_at]),
         recipe_malts_attributes: recipe.recipe_malts.to_json(except: [:recipe_id, :created_at, :updated_at]),
     } do %>
@@ -36,7 +37,7 @@
     <button v-on:click="saveRecipe">Save Recipe</button> -->
 
     <%= form_with(model: recipe, local: true, role: "form") do |form| %>
-      <% if recipe.errors.any? %>
+      <!-- <% if recipe.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
 
@@ -46,13 +47,20 @@
           <% end %>
           </ul>
         </div>
-      <% end %>
+      <% end %> -->
+
+      <div class="alert alert-danger" role="alert" v-if="Object.keys(recipe_errors).length != 0">
+        Please correct the errors below
+      </div>
 
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
             <%= form.label :name %>
-            <%= form.text_field :name, id: :recipe_name, class: "form-control", placeholder: "Name", "v-model": "recipe.name" %>
+            <%= form.text_field :name, id: :recipe_name, placeholder: "Name", "v-model": "recipe.name", "v-bind:class": "[recipe_errors.name ? 'is-invalid' : '', 'form-control']" %>
+            <div v-for="error in recipe_errors.name">
+              <div style="color:red">{{ error }}</div>
+            </div>
           </div>
         </div>
         <div class="col-sm-4">
@@ -73,19 +81,28 @@
         <div class="col-sm-4">
           <div class="form-group">
             <%= form.label :batch_size %>
-            <%= form.text_field :batch_size, id: :batch_size, class: "form-control", placeholder: "5 gallons", "v-model": "recipe.batch_size" %>
+            <%= form.text_field :batch_size, id: :batch_size, placeholder: "5 gallons", "v-model": "recipe.batch_size", "v-bind:class": "[recipe_errors.batch_size ? 'is-invalid' : '', 'form-control']" %>
+            <div v-for="error in recipe_errors.batch_size">
+              <div style="color:red">{{ error }}</div>
+            </div>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <%= form.label :original_gravity %>
-            <%= form.text_field :original_gravity, id: :original_gravity, class: "form-control", placeholder: "1.055", "v-model": "recipe.original_gravity" %>
+            <%= form.text_field :original_gravity, id: :original_gravity, placeholder: "1.055", "v-model": "recipe.original_gravity", "v-bind:class": "[recipe_errors.original_gravity ? 'is-invalid' : '', 'form-control']" %>
+            <div v-for="error in recipe_errors.original_gravity">
+              <div style="color:red">{{ error }}</div>
+            </div>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <%= form.label :final_gravity %>
-            <%= form.text_field :final_gravity, id: :final_gravity, class: "form-control", placeholder: "1.010", "v-model": "recipe.final_gravity" %>
+            <%= form.text_field :final_gravity, id: :final_gravity, placeholder: "1.010", "v-model": "recipe.final_gravity", "v-bind:class": "[recipe_errors.final_gravity ? 'is-invalid' : '', 'form-control']" %>
+            <div v-for="error in recipe_errors.final_gravity">
+              <div style="color:red">{{ error }}</div>
+            </div>
           </div>
         </div>
       </div>
