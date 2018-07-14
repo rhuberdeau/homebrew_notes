@@ -1,4 +1,24 @@
 namespace :data do
+  desc "Create Styles"
+  task create_styles: :environment do
+    puts "Creating Ale style:"
+    Style.create!(name: "Ale")
+    puts "Ale Style created!"
+    puts "Creating Lager style"
+    Style.create!(name: "Lager")
+    puts "Lager Style created!"
+  end
+
+  desc "Brew Methods"
+  task create_brew_methods: :environment do
+    puts "Creating BIAB:"
+    BrewMethod.create!(name: "BIAB")
+    puts "BIAB method created!"
+    puts "Creating Extract brew method"
+    BrewMethod.create!(name: "Lager")
+    puts "Extract brew method created!"
+  end
+
   desc "Create Malts"
   task create_malts: :environment do
 
@@ -11,16 +31,12 @@ namespace :data do
       "Base Malt - Golden Promise (UK)",
       "Base Malt - Lager (UK)",
       "Base Malt - Maris Otter (UK)",
-      "Base Malt - Maris Otter (UK) ",
       "Base Malt - Munich (American)",
       "Base Malt - Northwest Pale Ale (American)",
-      "Base Malt - Northwest Pale Ale (American) ",
       "Base Malt - Optic (UK)",
       "Base Malt - Superior Pilsen (American)",
-      "Base Malt - Superior Pilsen (American) ",
       "Base Malt - Vienna (American)",
       "Base Malt - White Wheat (American)",
-      "Base Malt - White Wheat (American) ",
       "Base Malt - Pilsner (German)",
       "Base Malt - Continental Pils",
       "SpeciBase Malt - Pale Rice (American)",
@@ -62,9 +78,12 @@ namespace :data do
       "Roasted Barley (UK)",
     ]
 
+    puts "Creating Malts"
     array.each do |a|
       Malt.find_or_create_by(name: a)
     end
+
+    puts "#{array.count} malts found or created!"
   end
 
   desc "Create Hops"
@@ -186,8 +205,11 @@ namespace :data do
       "Zythos"
       ]
 
+    puts "Creating hops!"
     hops.each do |h|
       Hop.find_or_create_by(name: h)
     end
+
+    puts "#{hops.count} hops found or created!"
   end
 end

@@ -57,11 +57,20 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-2">
           <div class="form-group">
             <%= form.label :batch_size %>
-            <%= form.text_field :batch_size, id: :batch_size, placeholder: "5 gallons", "v-model": "recipe.batch_size", "v-bind:class": "[recipe_errors.batch_size ? 'is-invalid' : '', 'form-control']" %>
+            <%= form.text_field :batch_size, id: :batch_size, placeholder: "5", "v-model": "recipe.batch_size", "v-bind:class": "[recipe_errors.batch_size ? 'is-invalid' : '', 'form-control']" %>
             <div v-for="error in recipe_errors.batch_size">
+              <div style="color:red">{{ error }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <%= form.label :unit %>
+            <%= form.select :unit, options_for_select(["gallons", "liters"].map {|b| [b, b]}), {}, {class: "form-control", "v-model": "recipe.unit"} %>
+            <div v-for="error in recipe_errors.brew_method">
               <div style="color:red">{{ error }}</div>
             </div>
           </div>
