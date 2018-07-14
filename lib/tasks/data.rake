@@ -21,6 +21,8 @@ namespace :data do
       "Base Malt - Vienna (American)",
       "Base Malt - White Wheat (American)",
       "Base Malt - White Wheat (American) ",
+      "Base Malt - Pilsner (German)",
+      "Base Malt - Continental Pils",
       "SpeciBase Malt - Pale Rice (American)",
       "Caramel / Crystal Malt - 120 Lovibond (American)",
       "Caramel / Crystal Malt - 15 Lovibond (American)",

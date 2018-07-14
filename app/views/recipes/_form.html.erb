@@ -8,33 +8,6 @@
         hop_schedules_attributes: recipe.hop_schedules.to_json(except: [:recipe_id, :created_at, :updated_at]),
         recipe_malts_attributes: recipe.recipe_malts.to_json(except: [:recipe_id, :created_at, :updated_at]),
     } do %>
-<!--
-    <div class="form-group">
-      <div class="entry input-group">
-        <label>Recipe Name</label>
-        <input type="text" v-model="recipe.name" class="form-control"/>
-        <label>Brew Method</label>
-        <input type="text" v-model="recipe.brew_method_id" />
-        <label>Brew Style</label>
-        <input type="text" v-model="recipe.style_id" />
-      </div>
-    </div>
-
-    <h4>Hops</h4>
-    <div v-for="(hop, index) in recipe.hop_schedules_attributes">
-      <label>Hop Id</label>
-      <input type="text" v-model="hop.hop_id" />
-      <label>Amount</label>
-      <input type="text" v-model="hop.amount" />
-      <label>Add at</label>
-      <input type="text" v-model="hop.at" />
-      <button v-on:click="removeHop(index)">Remove</button>
-    </div>
-
-    <button v-on:click="addHop">Add Hop</button>
-    <br  />
-
-    <button v-on:click="saveRecipe">Save Recipe</button> -->
 
     <%= form_with(model: recipe, local: true, role: "form") do |form| %>
       <!-- <% if recipe.errors.any? %>
@@ -66,13 +39,19 @@
         <div class="col-sm-4">
           <div class="dropdown">
             <%= form.label :style %>
-            <%= form.select :style_id, options_for_select(Style.all.map {|s| [s.name, s.id]}), {}, {:class => "form-control"} %>
+            <%= form.select :style_id, options_for_select(Style.all.map {|s| [s.name, s.id]}), {}, {class: "form-control", "v-model": "recipe.style_id"} %>
+            <div v-for="error in recipe_errors.style">
+              <div style="color:red">{{ error }}</div>
+            </div>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <%= form.label :brew_method %>
-            <%= form.select :brew_method_id, options_for_select(BrewMethod.all.map {|b| [b.name, b.id]}), {}, {:class => "form-control"} %>
+            <%= form.select :brew_method_id, options_for_select(BrewMethod.all.map {|b| [b.name, b.id]}), {}, {class: "form-control", "v-model": "recipe.brew_method_id"} %>
+            <div v-for="error in recipe_errors.brew_method">
+              <div style="color:red">{{ error }}</div>
+            </div>
           </div>
         </div>
       </div>

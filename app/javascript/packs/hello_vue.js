@@ -9,6 +9,7 @@ document.addEventListener('turbolinks:load', () => {
 
     var element = document.getElementById("recipe-form")
     if (element != null) {
+      var vm = this
       var id = element.dataset.id
       var recipe = JSON.parse(element.dataset.recipe)
       var recipe_errors = JSON.parse(element.dataset.recipeErrors)
@@ -34,6 +35,7 @@ document.addEventListener('turbolinks:load', () => {
                   hop_id: "",
                   amount: "",
                   at: "",
+                  unit: "",
                   _destroy: null
                 })
               },
@@ -62,8 +64,8 @@ document.addEventListener('turbolinks:load', () => {
                 if (this.id == null) {
                   this.$http.post('/recipes', { recipe: this.recipe }).then(response => {
                       Turbolinks.visit(`/recipes/${response.body.id}`)
-                  }, response => {
-                      console.log(response)
+                  }, error => {
+                      this.recipe_errors = JSON.parse(error.bodyText);
                   })
                 } else {
                   this.$http.put(`/recipes/${this.id}`, { recipe: this.recipe }).then(response => {

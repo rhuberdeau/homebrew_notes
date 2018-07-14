@@ -11,7 +11,7 @@
           <%= form.label :amount %>
           <%= form.text_field :amount, class: "form-control col-sm-2", "v-model": "malt.amount" %>
           <%= form.label :unit %>
-          <%= form.select :unit, options_for_select(["lbs", "g"].map {|b| [b, b]}), {}, {class: "form-control col-sm-2", "v-model": "malt.unit"} %>
+          <%= form.select :unit, options_for_select(["lbs", "oz", "g"].map {|b| [b, b]}), {}, {class: "form-control col-sm-2", "v-model": "malt.unit"} %>
         </div>
       </div>
     </div>
@@ -27,11 +27,11 @@
         <div class="entry input-group">
           <%= form.select :hop_id, options_for_select(Hop.all.map {|b| [b.name, b.id]}), {}, {:class => "form-control col-sm-3", "v-model": "hop.hop_id"} %>
           <%= form.label :amount %>
-          <%= form.text_field :amount, class: "form-control col-sm-1", "v-model": "hop.amount" %>
+          <%= form.text_field :amount, class: "form-control col-sm-2", "v-model": "hop.amount" %>
           <%= form.label :unit %>
           <%= form.select :unit, options_for_select(["oz", "g"].map {|b| [b, b]}), {}, {class: "form-control col-sm-2", "v-model": "hop.unit"} %>
           <%= form.label :at %>
-          <%= form.text_field :at, class: "form-control col-sm-2", "v-model": "hop.at" %>
+          <%= form.text_field :at, class: "form-control col-sm-1", "v-model": "hop.at" %>
         </div>
       </div>
     </div>
