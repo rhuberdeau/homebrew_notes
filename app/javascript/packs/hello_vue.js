@@ -26,7 +26,7 @@ document.addEventListener('turbolinks:load', () => {
             },
             methods: {
               hasError: function() {
-                 'is-invalid' 
+                 'is-invalid'
               },
               addHop: function(){
                 this.recipe.hop_schedules_attributes.push({
@@ -43,6 +43,7 @@ document.addEventListener('turbolinks:load', () => {
                   id: null,
                   malt_id: "",
                   amount: "",
+                  unit: "",
                   _destroy: null
                 })
               },

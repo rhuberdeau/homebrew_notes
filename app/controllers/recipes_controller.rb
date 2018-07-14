@@ -72,8 +72,8 @@ class RecipesController < ApplicationController
     def recipe_params
       params.require(:recipe).permit(:name, :brew_method_id, :style_id, :batch_size,
         :original_gravity, :final_gravity, hop_schedules_attributes: [ :id,
-        :hop_id, :recipe_id, :amount, :at, :alpha_level, :_destroy ], recipe_malts_attributes: [ :id,
-        :malt_id, :recipe_id, :amount ]
+        :hop_id, :recipe_id, :amount, :at, :alpha_level, :unit, :_destroy ], recipe_malts_attributes: [ :id,
+        :malt_id, :recipe_id, :amount, :unit, :_destroy ]
       )
     end
 end
