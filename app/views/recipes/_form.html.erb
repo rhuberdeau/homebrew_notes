@@ -95,13 +95,13 @@
         </div>
       </div>
 
+      <div class="actions">
+        <input type="submit" v-on:click.prevent="saveRecipe" name="commit" value="Save Recipe" class="btn btn-primary" data-disable-with="Save">
+      </div>
+
       <% if recipe.persisted? %>
         <%= render 'edit_fields', recipe: recipe, form: form %>
       <% end %>
-
-      <div class="actions">
-        <input type="submit" v-on:click.prevent="saveRecipe" name="commit" value="Save" class="btn btn-primary" data-disable-with="Save">
-      </div>
     <% end %>
 
 <% end %>

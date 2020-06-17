@@ -15,7 +15,7 @@ namespace :data do
     BrewMethod.create!(name: "BIAB")
     puts "BIAB method created!"
     puts "Creating Extract brew method"
-    BrewMethod.create!(name: "Lager")
+    BrewMethod.create!(name: "Extract")
     puts "Extract brew method created!"
   end
 

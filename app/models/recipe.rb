@@ -6,9 +6,6 @@ class Recipe < ApplicationRecord
   belongs_to :brew_method
   belongs_to :style
 
-  accepts_nested_attributes_for :hop_schedules, allow_destroy: true
-  accepts_nested_attributes_for :recipe_malts, allow_destroy: true
-
   validates :name, presence: true, uniqueness: true, length: { minimum: 2 }
   validates :batch_size, presence: true, numericality: true
   validates :unit, presence: true

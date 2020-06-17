@@ -1,0 +1,2 @@
+module RecipeMaltsHelper
+end

@@ -22,14 +22,14 @@ ActiveRecord::Schema.define(version: 20180714142825) do
   end
 
   create_table "hop_schedules", force: :cascade do |t|
-    t.integer "hop_id", null: false
-    t.integer "recipe_id", null: false
+    t.bigint "hop_id", null: false
+    t.bigint "recipe_id", null: false
     t.decimal "amount", precision: 4, scale: 2, null: false
     t.string "at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "alpha_level"
-    t.string "unit"
+    t.string "unit", null: false
     t.index ["hop_id"], name: "index_hop_schedules_on_hop_id"
     t.index ["recipe_id"], name: "index_hop_schedules_on_recipe_id"
   end
@@ -47,12 +47,12 @@ ActiveRecord::Schema.define(version: 20180714142825) do
   end
 
   create_table "recipe_malts", force: :cascade do |t|
-    t.integer "malt_id", null: false
-    t.integer "recipe_id", null: false
+    t.bigint "malt_id", null: false
+    t.bigint "recipe_id", null: false
     t.decimal "amount", precision: 4, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "unit"
+    t.string "unit", null: false
     t.index ["malt_id"], name: "index_recipe_malts_on_malt_id"
     t.index ["recipe_id"], name: "index_recipe_malts_on_recipe_id"
   end
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20180714142825) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "style_id"
-    t.integer "brew_method_id"
+    t.bigint "style_id"
+    t.bigint "brew_method_id"
     t.integer "batch_size"
     t.float "original_gravity"
     t.float "final_gravity"

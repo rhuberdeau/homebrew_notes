@@ -1,0 +1,2 @@
+module Recipes::HopSchedulesHelper
+end

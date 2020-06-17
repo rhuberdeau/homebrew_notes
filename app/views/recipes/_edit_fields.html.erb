@@ -1,39 +1,48 @@
-<div class="row form-group">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-header">
-        Wort
-      </div>
-      <button class="btn btn-primary" v-on:click.prevent="addMalt">Add Malt</button>
-        <div class="form-inline" v-for="(malt, index) in recipe.recipe_malts_attributes">
-        <div class="entry input-group">
-          <%= form.select :malt_id, options_for_select(Malt.order(name: :asc).map {|b| [b.name, b.id]}), {}, {class: "form-control col-sm-5", "v-model": "malt.malt_id"} %>
-          <%= form.label :amount %>
-          <%= form.text_field :amount, class: "form-control col-sm-2", "v-model": "malt.amount" %>
-          <%= form.label :unit %>
-          <%= form.select :unit, options_for_select(["lbs", "oz", "g"].map {|b| [b, b]}), {}, {class: "form-control col-sm-2", "v-model": "malt.unit"} %>
-        </div>
-      </div>
+<form>
+  <h2>Malts</h2>
+  <button class="btn btn-primary" v-on:click.prevent="addMalt">Add Malt</button>
+  <div class="form-row" v-for="(malt, index) in recipe.recipe_malts_attributes">
+    <div class="input-group col-md-6">
+      <%= form.select :malt_id, options_for_select(Malt.order(name: :asc).map {|b| [b.name, b.id]}), {}, {class: "form-control", "v-model": "malt.malt_id"} %>
     </div>
-  </div>
 
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-header">
-        Hops
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= form.text_field :amount, class: "form-control", "v-model": "malt.amount", placeholder: "Amount" %>
       </div>
-      <button class="btn btn-primary" v-on:click.prevent="addHop">Add Hop</button>
-      <div class="form-inline" v-for="(hop, index) in recipe.hop_schedules_attributes">
-        <div class="entry input-group">
-          <%= form.select :hop_id, options_for_select(Hop.all.map {|b| [b.name, b.id]}), {}, {:class => "form-control col-sm-3", "v-model": "hop.hop_id"} %>
-          <%= form.label :amount %>
-          <%= form.text_field :amount, class: "form-control col-sm-2", "v-model": "hop.amount" %>
-          <%= form.label :unit %>
-          <%= form.select :unit, options_for_select(["oz", "g"].map {|b| [b, b]}), {}, {class: "form-control col-sm-2", "v-model": "hop.unit"} %>
-          <%= form.label :at %>
-          <%= form.text_field :at, class: "form-control col-sm-1", "v-model": "hop.at" %>
-        </div>
+      <div class="form-group col-md-4">
+        <%= form.select :unit, options_for_select(["lbs", "oz", "g"].map {|b| [b, b]}), {}, {class: "form-control", "v-model": "malt.unit"} %>
+      </div>
+      <div class="form-group input-group-prepend">
+        <button class="btn btn-primary" type="button" v-on:click.prevent="saveMalt(index)" >Save Malt</button>
       </div>
     </div>
   </div>
-</div>
+</form>
+
+<form>
+  <h2>Hops</h2>
+  <button class="btn btn-primary" v-on:click.prevent="addHop">Add Hop</button>
+  <div class="form-row" v-for="(hop, index) in recipe.hop_schedules_attributes">
+    <div class="input-group col-md-3">
+      <%= form.select :hop_id, options_for_select(Hop.all.map {|b| [b.name, b.id]}), {}, {:class => "form-control", "v-model": "hop.hop_id"} %>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <%= form.text_field :amount, class: "form-control", "v-model": "hop.amount" %>
+      </div>
+      <div class="form-group col-md-2">
+        <%= form.select :unit, options_for_select(["oz", "g"].map {|b| [b, b]}), {}, {class: "form-control", "v-model": "hop.unit"} %>
+      </div>
+      <div class="form-group input-group-prepend">
+        <span class="input-group-text">@</span>
+      </div>
+      <div class="form-group col-md-2">
+        <%= form.text_field :at, class: "form-control", "v-model": "hop.at" %>
+      </div>
+      <div class="form-group input-group-prepend">
+        <button class="btn btn-primary" type="button" v-on:click.prevent="saveHopSchedule(index)">Save Hop</button>
+      </div>
+    </div>
+  </div>
+</form>
