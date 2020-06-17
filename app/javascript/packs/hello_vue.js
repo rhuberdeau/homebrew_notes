@@ -12,6 +12,7 @@ document.addEventListener('turbolinks:load', () => {
       var vm = this
       var id = element.dataset.id
       var recipe = JSON.parse(element.dataset.recipe)
+      var recipe_id = recipe.id
       var recipe_errors = JSON.parse(element.dataset.recipeErrors)
       var hop_schedules_attributes = JSON.parse(element.dataset.hopSchedulesAttributes)
       var recipe_malts_attributes = JSON.parse(element.dataset.recipeMaltsAttributes)
@@ -57,6 +58,40 @@ document.addEventListener('turbolinks:load', () => {
                   this.recipe.hop_schedules_attributes.splice(index, 1)
                 } else {
                   this.recipe.hop_schedules_attributes[index]._destroy = "1"
+                }
+              },
+
+              saveMalt: function (index) {
+                var malt = this.recipe.recipe_malts_attributes[index]
+                if (malt.id == null) {
+                  this.$http.post(`/recipes/${this.id}/recipe_malts`, {recipe_malt: malt}).then(response => {
+                    console.log(response)
+                  }, error => {
+                    console.log(error)
+                  })
+                } else {
+                  this.$http.put(`/recipes/${this.id}/recipe_malts/${malt.id}`, {recipe_malt: malt}).then(response => {
+                    console.log(response)
+                  }, error => {
+                    console.log(error)
+                  })
+                }
+              },
+
+              saveHopSchedule: function (index) {
+                var hop = this.recipe.hop_schedules_attributes[index]
+                if (hop.id == null) {
+                  this.$http.post(`/recipes/${this.id}/hop_schedules`, {hop_schedule: hop}).then(response => {
+                    console.log(response)
+                  }, error => {
+                    console.log(error)
+                  })
+                } else {
+                  this.$http.put(`/recipes/${this.id}/hop_schedules/${hop.id}`, {hop_schedule: hop}).then(response => {
+                    console.log(response)
+                  }, error => {
+                    console.log(error)
+                  })
                 }
               },
 
